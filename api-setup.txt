@@ -1,0 +1,29 @@
+Integration Guide for Bet 33 Landing Page
+This guide explains how to connect the static landing page to your backend services (Netlify, PayPal, Beehiiv).
+
+1. Netlify IntegrationThis page is ready for Netlify deployment.
+Forms: The newsletter form uses data-netlify="true". 
+When you deploy to Netlify, the platform automatically detects this and starts collecting submissions in your Netlify Dashboard under "Forms".
+Deployment: Simply drag and drop the folder containing index.html into the Netlify "Sites" dashboard.
+
+2. Beehiiv (Newsletter)To switch from Netlify Forms to direct Beehiiv submission:
+Go to your Beehiiv Dashboard -> Settings -> Subscribe Forms.
+Copy the Embed URL or Form Action URL.
+In index.html, locate the <form> tag in the #newsletter section.
+Replace the <form> tag with your Beehiiv embed code, or simply update the action="..." attribute to point to Beehiiv's endpoint.
+
+3. PayPal IntegrationThe pricing buttons currently are standard HTML buttons. 
+To accept payments:
+
+Log in to the PayPal Developer Dashboard (using the credentials you have in env.txt).
+Generate a Smart Payment Button code snippet.
+
+In index.html, locate the "Subscribe Now" button in the pricing card.
+
+Replace the <button> with the PayPal <div> container provided by their SDK.
+
+Add the PayPal JS SDK script to the <head> of the document:<script src="[https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&vault=true&intent=subscription](https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&vault=true&intent=subscription)"></script>
+
+4. Connect / Manus AIThe "Powered by Manus AI" badge is currently cosmetic.
+To make it functional (e.g., fetch live stats), you would typically create a Netlify Function (netlify/functions/get-stats.js) that calls the Manus API and returns the data to the frontend via fetch().
+
